@@ -1,30 +1,43 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <v-card  >
+    <v-layout>
+      <v-navigation-drawer v-model="drawer" :rail="rail" rail-width="85" permanent @click="rail = false">
+        <v-list-item prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg" title="John Leider" nav>
+          <template v-slot:append>
+            <v-btn icon="mdi-chevron-left" variant="text" @click.stop="rail = !rail"></v-btn>
+          </template>
+        </v-list-item>
+
+        <v-divider></v-divider>
+
+        <v-list density="compact" nav>
+          <v-list-item prepend-icon="mdi-home-city" title="Home" value="home" @click="$router.push('/mainpageView')" >
+          </v-list-item>
+          <v-list-item prepend-icon="mdi-account" title="Pending Task" value="account" @click="$router.push('/main_tabl')"></v-list-item>
+          <v-list-item prepend-icon="mdi-account-group-outline" title="Total Earning" value="users" @click="$router.push('/total_earning')"></v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+      <v-main>
+      <RouterView/>
+        <!-- <mainpageView></mainpageView> -->
+      </v-main>
+    </v-layout>
+  </v-card>
   </nav>
-  <router-view/>
 </template>
 
+<script>
+
+export default {
+  name: 'App',
+  data: () => ({
+    drawer: true,
+      rail: false,
+  }),
+}
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
